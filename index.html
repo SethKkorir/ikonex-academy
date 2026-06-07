@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ikonex Academy Portal</title>
+    <!-- Outfit & Inter Fonts -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="material-icons-round">school</i>
+            <span>Ikonex Academy</span>
+        </div>
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-item active" data-tab="dashboard">
+                    <a href="#dashboard"><i class="material-icons-round">dashboard</i> Dashboard</a>
+                </li>
+                <li class="nav-item" data-tab="streams">
+                    <a href="#streams"><i class="material-icons-round">groups</i> Class Streams</a>
+                </li>
+                <li class="nav-item" data-tab="students">
+                    <a href="#students"><i class="material-icons-round">person</i> Students</a>
+                </li>
+                <li class="nav-item" data-tab="subjects">
+                    <a href="#subjects"><i class="material-icons-round">book</i> Subjects</a>
+                </li>
+                <li class="nav-item" data-tab="scores">
+                    <a href="#scores"><i class="material-icons-round">grade</i> Input Scores</a>
+                </li>
+                <li class="nav-item" data-tab="results">
+                    <a href="#results"><i class="material-icons-round">analytics</i> Results & Analytics</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Top Header Bar -->
+        <header class="top-bar">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <button class="action-btn" id="mobile-menu-toggle" style="display: none;">
+                    <i class="material-icons-round">menu</i>
+                </button>
+                <h1 id="page-title">Academy School Portal</h1>
+            </div>
+
+            <div class="header-actions">
+                <button class="action-btn" id="theme-toggle" title="Toggle Theme">
+                    <i class="material-icons-round">dark_mode</i>
+                </button>
+                <button class="action-btn" title="Notifications">
+                    <i class="material-icons-round">notifications</i>
+                    <span class="badge-dot"></span>
+                </button>
+                <div class="user-profile">
+                    <div class="avatar">AD</div>
+                    <div class="user-info" style="display: none; display: md-block;">
+                        <span class="user-name">Admin User</span>
+                        <span class="user-role">Super Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Body -->
+        <div class="content-body">
+
+            <!-- Global Stats Banner (Present across most views for context) -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Total Students</h3>
+                        <p id="stat-total-students">142</p>
+                    </div>
+                    <div class="stat-icon-wrapper icon-blue">
+                        <i class="material-icons-round">person</i>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Streams</h3>
+                        <p id="stat-total-streams">6</p>
+                    </div>
+                    <div class="stat-icon-wrapper icon-cyan">
+                        <i class="material-icons-round">grid_view</i>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>School Average</h3>
+                        <p id="stat-school-average">68%</p>
+                    </div>
+                    <div class="stat-icon-wrapper icon-green">
+                        <i class="material-icons-round">trending_up</i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 1: DASHBOARD -->
+            <div class="tab-panel active" id="panel-dashboard">
+                <div class="dashboard-details">
+                    <!-- Top Performers Table Card -->
+                    <div class="card-section">
+                        <div class="section-header">
+                            <h2>Top Performing Students</h2>
+                            <a href="#students" onclick="switchTab('students')" class="btn btn-secondary">View All
+                                Students</a>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Name</th>
+                                        <th>Stream</th>
+                                        <th>Average Score</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="top-students-list">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Quick Registration Card -->
+                    <div class="card-section">
+                        <div class="section-header">
+                            <h2>Register Student</h2>
+                        </div>
+                        <form id="quick-register-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="reg-name">Student Full Name</label>
+                                    <input type="text" id="reg-name" class="form-control"
+                                        placeholder="e.g. Samuel Kamau" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-stream">Class Stream</label>
+                                    <select id="reg-stream" class="form-control" required>
+                                        <option value="">Select a Stream</option>
+                                        <!-- Populated dynamically -->
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="margin-top: 8px;">Register
+                                    Student</button>
+                            </div>
+                        </form>
+                        <div class="alert-info-box">
+                            <i class="material-icons-round">info</i>
+                            <p>Registration will automatically assign a unique Student ID and notify the stream teacher.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: STREAMS -->
+            <div class="tab-panel" id="panel-streams">
+                <div class="card-section">
+                    <div class="section-header">
+                        <h2>Class Streams</h2>
+                        <button class="btn btn-primary" onclick="openModal('modal-add-stream')">
+                            <i class="material-icons-round">add</i> Create New Stream
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Stream Name</th>
+                                    <th>Class Teacher</th>
+                                    <th>Total Students</th>
+                                    <th>Average Performance</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="streams-table-body">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: STUDENTS -->
+            <div class="tab-panel" id="panel-students">
+                <div class="card-section">
+                    <div class="section-header">
+                        <h2>All Students</h2>
+                        <button class="btn btn-primary" onclick="openModal('modal-add-student')">
+                            <i class="material-icons-round">add</i> Add New Student
+                        </button>
+                    </div>
+
+                    <!-- Search and Filtering -->
+                    <div class="filter-bar">
+                        <div class="search-wrapper">
+                            <i class="material-icons-round">search</i>
+                            <input type="text" id="student-search" class="form-control"
+                                placeholder="Search by name or student ID...">
+                        </div>
+                        <div class="filters-group">
+                            <select id="filter-stream" class="form-control">
+                                <option value="">All Streams</option>
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Stream</th>
+                                    <th>Average Score</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="students-table-body">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: SUBJECTS -->
+            <div class="tab-panel" id="panel-subjects">
+                <div class="card-section">
+                    <div class="section-header">
+                        <h2>School Subjects</h2>
+                        <button class="btn btn-primary" onclick="openModal('modal-add-subject')">
+                            <i class="material-icons-round">add</i> Create New Subject
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Subject Name</th>
+                                    <th>Credits/Hours</th>
+                                    <th>Subject Teacher</th>
+                                    <th>Total Enrolled</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subjects-table-body">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: INPUT SCORES -->
+            <div class="tab-panel" id="panel-scores">
+                <div class="card-section">
+                    <div class="section-header">
+                        <h2>Input Student Scores</h2>
+                    </div>
+                    <form id="enter-score-form">
+                        <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                            <div class="form-group">
+                                <label for="score-student">Select Student</label>
+                                <select id="score-student" class="form-control" required>
+                                    <option value="">Choose Student</option>
+                                    <!-- Dynamically populated -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="score-subject">Select Subject</label>
+                                <select id="score-subject" class="form-control" required>
+                                    <option value="">Choose Subject</option>
+                                    <!-- Dynamically populated -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="score-value">Exam Score (0 - 100)</label>
+                                <input type="number" id="score-value" class="form-control" min="0" max="100"
+                                    placeholder="e.g. 78" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary"
+                            style="margin-top: 24px; width: auto; min-width: 200px;">
+                            Record Score Record
+                        </button>
+                    </form>
+                </div>
+
+                <div class="card-section">
+                    <div class="section-header">
+                        <h2>Recent Scores Registered</h2>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Subject</th>
+                                    <th>Score</th>
+                                    <th>Grade</th>
+                                    <th>Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scores-table-body">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 6: RESULTS & ANALYTICS -->
+            <div class="tab-panel" id="panel-results">
+                <div class="dashboard-details">
+                    <!-- Overall Performance Breakdown -->
+                    <div class="card-section">
+                        <div class="section-header">
+                            <h2>Performance by Subject</h2>
+                        </div>
+                        <div class="bar-chart-container" id="subject-performance-bars">
+                            <!-- Dynamic Bars will go here -->
+                        </div>
+                    </div>
+
+                    <!-- Grade Distribution Breakdown -->
+                    <div class="card-section">
+                        <div class="section-header">
+                            <h2>Grade Distribution</h2>
+                        </div>
+                        <div class="bar-chart-container" id="grade-distribution-bars">
+                            <!-- Dynamic Bars will go here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODAL: ADD STREAM -->
+    <div class="modal" id="modal-add-stream">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Stream</h3>
+                <button class="modal-close" onclick="closeModal('modal-add-stream')">&times;</button>
+            </div>
+            <form id="add-stream-form">
+                <div class="modal-body">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="stream-name">Stream Name</label>
+                            <input type="text" id="stream-name" class="form-control" placeholder="e.g. Stream C"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stream-teacher">Class Teacher</label>
+                            <input type="text" id="stream-teacher" class="form-control"
+                                placeholder="e.g. Mrs. Jane Cooper" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        onclick="closeModal('modal-add-stream')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Stream</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: ADD STUDENT -->
+    <div class="modal" id="modal-add-student">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Student</h3>
+                <button class="modal-close" onclick="closeModal('modal-add-student')">&times;</button>
+            </div>
+            <form id="add-student-form">
+                <div class="modal-body">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="student-name">Student Full Name</label>
+                            <input type="text" id="student-name" class="form-control" placeholder="e.g. David Alaba"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="student-stream">Assigned Stream</label>
+                            <select id="student-stream" class="form-control" required>
+                                <option value="">Select Stream</option>
+                                <!-- Dynamically populated -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        onclick="closeModal('modal-add-student')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: ADD SUBJECT -->
+    <div class="modal" id="modal-add-subject">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Subject</h3>
+                <button class="modal-close" onclick="closeModal('modal-add-subject')">&times;</button>
+            </div>
+            <form id="add-subject-form">
+                <div class="modal-body">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="subject-name">Subject Name</label>
+                            <input type="text" id="subject-name" class="form-control" placeholder="e.g. Chemistry"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject-credits">Credit Hours</label>
+                            <input type="number" id="subject-credits" class="form-control" placeholder="e.g. 4" min="1"
+                                max="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject-teacher">Subject Teacher</label>
+                            <input type="text" id="subject-teacher" class="form-control"
+                                placeholder="e.g. Mr. Walter White" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        onclick="closeModal('modal-add-subject')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Subject</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript App Controller -->
+    <script src="app.js"></script>
+</body>
+
+</html>
