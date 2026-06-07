@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
-const MONGO_URI = process.env.MONGO_URI;
 
-const connectDB = async () => {
+async function connectDB() {
+    const mongoUri = process.env.MONGO_URI;
     try {
-        await mongoose.connect(MONGO_URI);
+        await mongoose.connect(mongoUri);
         console.log("Database connected successfully");
+        const seedDB = require('./seed');
+        await seedDB();
     } catch (error) {
-        console.error("Database connection failed", error);
+        console.log("Database connection failed", error);
         process.exit(1);
     }
-};
+}
 
-module.exports = connectDB; 
+module.exports = connectDB;

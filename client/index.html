@@ -346,6 +346,35 @@
                             <!-- Dynamic Bars will go here -->
                         </div>
                     </div>
+
+                    <!-- Generate PDF Reports Section -->
+                    <div class="card-section" style="grid-column: span 2;">
+                        <div class="section-header">
+                            <h2>Generate PDF Reports</h2>
+                        </div>
+                        <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;">
+                            <div class="form-group">
+                                <label for="print-select-student">Select Student</label>
+                                <select id="print-select-student" class="form-control">
+                                    <option value="">Choose Student</option>
+                                    <!-- Populated dynamically -->
+                                </select>
+                                <button onclick="printStudentFromResults()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">
+                                    <i class="material-icons-round" style="font-size:18px; vertical-align:middle; margin-right:6px;">picture_as_pdf</i> Print Report Card
+                                </button>
+                            </div>
+                            <div class="form-group">
+                                <label for="print-select-stream">Select Class Stream</label>
+                                <select id="print-select-stream" class="form-control">
+                                    <option value="">Choose Stream</option>
+                                    <!-- Populated dynamically -->
+                                </select>
+                                <button onclick="printStreamFromResults()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">
+                                    <i class="material-icons-round" style="font-size:18px; vertical-align:middle; margin-right:6px;">picture_as_pdf</i> Print Class Sheet
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
