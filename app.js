@@ -30,8 +30,11 @@ app.use('/api/subjects', subjectRoutes);
 app.use('/api/scores', scoreRoutes);
 app.use('/api/results', resultsRoutes);
 
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, 'client')));
+
 // Fallback all non-API GET requests to index.html
-app.get('/*', function (req, res, next) {
+app.use(function (req, res, next) {
     if (req.path.startsWith('/api')) {
         return next();
     }
