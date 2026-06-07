@@ -5,8 +5,6 @@ async function connectDB() {
     try {
         await mongoose.connect(mongoUri);
         console.log("Database connected successfully");
-        const seedDB = require('./seed');
-        await seedDB();
     } catch (error) {
         console.log("Database connection failed", error);
         process.exit(1);
