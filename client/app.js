@@ -414,6 +414,8 @@ function switchTab(tab) {
     if (tab === "results") renderResults();
 
     document.getElementById("sidebar").classList.remove("mobile-active");
+    const overlay = document.getElementById("sidebar-overlay");
+    if (overlay) overlay.classList.remove("active");
 }
 
 function openModal(id) {
@@ -898,12 +900,28 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     }
 
+    const overlay = document.getElementById("sidebar-overlay");
     const mob = document.getElementById("mobile-menu-toggle");
     if (mob) {
         if (window.innerWidth <= 768) mob.style.display = "flex";
         mob.addEventListener("click", function (e) {
             e.stopPropagation();
-            document.getElementById("sidebar").classList.toggle("mobile-active");
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("mobile-active");
+            if (overlay) {
+                if (sidebar.classList.contains("mobile-active")) {
+                    overlay.classList.add("active");
+                } else {
+                    overlay.classList.remove("active");
+                }
+            }
+        });
+    }
+
+    if (overlay) {
+        overlay.addEventListener("click", function () {
+            document.getElementById("sidebar").classList.remove("mobile-active");
+            overlay.classList.remove("active");
         });
     }
 
@@ -915,6 +933,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 if (sidebar.contains(e.target) === false) {
                     if (mobileBtn.contains(e.target) === false) {
                         sidebar.classList.remove("mobile-active");
+                        if (overlay) overlay.classList.remove("active");
                     }
                 }
             }
@@ -929,6 +948,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             } else {
                 mob.style.display = "none";
                 document.getElementById("sidebar").classList.remove("mobile-active");
+                if (overlay) overlay.classList.remove("active");
             }
         }
     });
